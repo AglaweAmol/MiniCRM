@@ -1,6 +1,7 @@
 package com.minicrm.service.impl;
 
 import com.minicrm.entity.Leads;
+import com.minicrm.exception.ResourceNotFoundException;
 import com.minicrm.payload.LeadDTO;
 import com.minicrm.repository.LeadRepository;
 import org.modelmapper.ModelMapper;
@@ -27,6 +28,24 @@ public class LeadServiceImpl implements LeadService{
        LeadDTO leadresponse=mapToDto(leadnew);
 
       return leadresponse;
+    }
+
+    @Override
+    public LeadDTO getLeadById(Long id) {
+
+        Leads leads= leadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(""));
+
+        return mapToDto(leads);
+    }
+
+    @Override
+    public LeadDTO updateLead(LeadDTO leadDTO, long id) {
+        return null;
+    }
+
+    @Override
+    public LeadDTO deleteById(Long id) {
+        return null;
     }
 
     // convert Entity into DTO
