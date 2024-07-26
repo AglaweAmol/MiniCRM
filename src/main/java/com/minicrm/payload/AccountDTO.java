@@ -2,7 +2,6 @@ package com.minicrm.payload;
 
 
 import lombok.Data;
-import org.springframework.http.HttpStatusCode;
 
 @Data
 public class AccountDTO {
