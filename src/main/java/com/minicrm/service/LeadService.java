@@ -1,4 +1,4 @@
-package com.minicrm.service.impl;
+package com.minicrm.service;
 
 import com.minicrm.payload.LeadDTO;
 

@@ -1,24 +1,26 @@
-package com.minicrm.service.impl;
+package com.minicrm.serviceImpl;
 
 import com.minicrm.entity.Leads;
 import com.minicrm.exception.ResourceNotFoundException;
 import com.minicrm.payload.LeadDTO;
 import com.minicrm.repository.LeadRepository;
+import com.minicrm.service.LeadService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class LeadServiceImpl implements LeadService{
+public class LeadServiceImpl implements LeadService {
 
 
     private LeadRepository leadRepository;
 
     private ModelMapper mapper;
 
-    public LeadServiceImpl(LeadRepository leadRepository)
+    public LeadServiceImpl(LeadRepository leadRepository,ModelMapper mapper)
     {
         this.leadRepository=leadRepository;
+        this.mapper=mapper;
     }
     @Override
     public LeadDTO createLead(LeadDTO leadDTO) {
@@ -40,12 +42,26 @@ public class LeadServiceImpl implements LeadService{
 
     @Override
     public LeadDTO updateLead(LeadDTO leadDTO, long id) {
-        return null;
+        Leads leads=leadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(""));
+        leads.setLeadSource(leadDTO.getLeadSource());
+        leads.setLeadStatus(leadDTO.getLeadStatus());
+        leads.setId(leadDTO.getId());
+        leads.setEmail(leadDTO.getEmail());
+        leads.setAddress(leadDTO.getAddress());
+        leads.setCompanyName(leadDTO.getCompanyName());
+        leads.setFirstName(leadDTO.getFirstName());
+        leads.setPassword(leadDTO.getPassword());
+        Leads updateLead=leadRepository.save(leads);
+        return mapToDto(updateLead);
     }
 
     @Override
     public LeadDTO deleteById(Long id) {
-        return null;
+        Leads leads=leadRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(""));
+
+        leadRepository.delete(leads);
+
+        return mapToDto(leads);
     }
 
     // convert Entity into DTO
