@@ -1,9 +1,14 @@
 package com.minicrm.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
 import javax.persistence.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@Data
 @Entity
 @Table(name="accounts")
 public class Account {
@@ -11,126 +16,52 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="account_id")
-    private Integer accountId;
+    private Long accountId;
+
+    @Column(name = "account_name")
     private String accountName;
+
+    @Column(name = "account_owner")
     private String accountOwner;
-    private Integer phone;
+
+    @Column(name = "phone")
+    private Long phone;
+
+    @Column(name = "fax")
     private String fax;
+
+    @Column(name = "website")
     private String website;
+
+    @Column(name = "annual_revenue")
     private double annualRevenue;
+
+    @Column(name = "industry")
     private String industry;
+
+    @Column(name = "billing_address")
     private String billingAddress;
+
+    @Column(name = "shipping_address")
     private String shippingAddress;
+
+    @Column(name = "account_site")
     private String accountSite;
+
+    @Column(name = "sic_code")
     private String sicCode;
+
+    @Column(name = "description")
     private String description;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id",insertable = false,updatable = false)
-    private List<Contact> contacts;
 
-    public Integer getAccountId(Integer accountId) {
-        return this.accountId;
-    }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
 
-    public String getAccountName(String accountName) {
-        return this.accountName;
-    }
+@OneToMany
+@JoinColumn(name="account_id")
+private Set<Deals> deals;
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
 
-    public String getAccountOwner() {
-        return accountOwner;
-    }
 
-    public void setAccountOwner(String accountOwner) {
-        this.accountOwner = accountOwner;
-    }
-
-    public Integer getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Integer phone) {
-        this.phone = phone;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public double getAnnualRevenue() {
-        return annualRevenue;
-    }
-
-    public void setAnnualRevenue(double annualRevenue) {
-        this.annualRevenue = annualRevenue;
-    }
-
-    public String getIndustry() {
-        return industry;
-    }
-
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
-    public String getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(String billingAddress) {
-        this.billingAddress = billingAddress;
-    }
-
-    public String getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
-    public String getAccountSite() {
-        return accountSite;
-    }
-
-    public void setAccountSite(String accountSite) {
-        this.accountSite = accountSite;
-    }
-
-    public String getSicCode() {
-        return sicCode;
-    }
-
-    public void setSicCode(String sicCode) {
-        this.sicCode = sicCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

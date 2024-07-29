@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class LeadDTO {
-    private Integer id;
+    private Long id;
 
     private String email;
 

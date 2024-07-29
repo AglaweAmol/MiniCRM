@@ -3,13 +3,15 @@ package com.minicrm.payload;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class AccountDTO {
 
-    private Integer accountId;
+    private Long accountId;
     private String accountName;
     private String accountOwner;
-    private Integer phone;
+    private Long phone;
     private String fax;
     private String website;
     private double annualRevenue;
@@ -20,4 +22,5 @@ public class AccountDTO {
     private String sicCode;
     private String description;
 
+    private Set<DealDTO> deals;
 }

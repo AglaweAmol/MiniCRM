@@ -28,7 +28,7 @@ public class LeadController {
   }
 
   @GetMapping("/leads/{id}")
-  public ResponseEntity<LeadDTO> getLeadById(@PathVariable(name="id") long id)
+  public ResponseEntity<LeadDTO> getLeadById(@PathVariable(name="id") Long id)
   {
       return ResponseEntity.ok(leadService.getLeadById(id));
   }

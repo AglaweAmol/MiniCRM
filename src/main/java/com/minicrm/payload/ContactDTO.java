@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class ContactDTO {
-    private Integer conatactId;
+    private Long conatactId;
     private String contactFirstName;
     private String contactLastName;
     private String email;

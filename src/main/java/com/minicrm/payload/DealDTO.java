@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class DealDTO {
 
-    private Integer dealId;
+    private Long dealId;
     private String dealName;
     private String accountName;
     private String contactName;
