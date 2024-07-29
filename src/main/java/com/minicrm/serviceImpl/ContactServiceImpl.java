@@ -28,8 +28,8 @@ public class ContactServiceImpl implements ContactService {
     public ContactDTO createContact(ContactDTO contactDTO) {
 
         Contact contact=mapToEntity(contactDTO);
-        Contact udpateContact=contactRepository.save(contact);
-        ContactDTO contactRepsonse=mapToDto(udpateContact);
+        Contact createContact=contactRepository.save(contact);
+        ContactDTO contactRepsonse=mapToDto(createContact);
         return contactRepsonse;
     }
 
