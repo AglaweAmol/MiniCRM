@@ -1,6 +1,8 @@
 package com.minicrm.service;
 
 import com.minicrm.payload.DealDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface DealService {
 
@@ -14,5 +16,5 @@ public interface DealService {
 
         DealDTO dealDeleteById(Long id);
 
-
+        Page<DealDTO> getAllDeals(Pageable pageable);
 }

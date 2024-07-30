@@ -1,6 +1,8 @@
 package com.minicrm.service;
 
 import com.minicrm.payload.LeadDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface LeadService {
 
@@ -12,6 +14,9 @@ public interface LeadService {
     LeadDTO updateLead(LeadDTO leadDTO,long id);
 
     LeadDTO deleteById(Long id);
+
+
+    Page<LeadDTO> getAllLeads(Pageable pageable);
 
 
 

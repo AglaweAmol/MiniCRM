@@ -9,6 +9,8 @@ import com.minicrm.payload.DealDTO;
 import com.minicrm.repository.DealRepository;
 import com.minicrm.service.DealService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -67,6 +69,10 @@ public class DealServiceImpl implements DealService {
         return mapToDto(deals);
     }
 
+    @Override
+    public Page<DealDTO> getAllDeals(Pageable pageable) {
+        return dealRepository.findAll(pageable).map(deals -> mapToDto(deals));
+    }
 
 
     private DealDTO mapToDto(Deals Deals)

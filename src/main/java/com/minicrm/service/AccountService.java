@@ -1,6 +1,10 @@
 package com.minicrm.service;
 
 import com.minicrm.payload.AccountDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface AccountService {
 
@@ -11,6 +15,8 @@ public interface AccountService {
     AccountDTO updateAccount(AccountDTO accountDTO,Long id);
 
     AccountDTO deleteByAccountId(Long id);
+
+    Page<AccountDTO> getAllAccounts(Pageable pageable);
 
 
 }

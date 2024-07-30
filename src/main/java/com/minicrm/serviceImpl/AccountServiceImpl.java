@@ -8,7 +8,12 @@ import com.minicrm.payload.LeadDTO;
 import com.minicrm.repository.AccountRepository;
 import com.minicrm.service.AccountService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -60,6 +65,13 @@ public class AccountServiceImpl implements AccountService {
          accountRepository.delete(account);
         return mapToDto(account);
     }
+
+    @Override
+    public Page<AccountDTO> getAllAccounts(Pageable pageable) {
+        return accountRepository.findAll(pageable)
+                .map(account -> mapToDto(account));
+    }
+
 
 
 

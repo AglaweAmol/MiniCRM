@@ -1,8 +1,12 @@
 package com.minicrm.controller;
 
+import com.minicrm.payload.AccountDTO;
 import com.minicrm.payload.ContactDTO;
 import com.minicrm.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +43,16 @@ public class ContactController {
 
         return new ResponseEntity<>(contactDTO1,HttpStatus.OK);
     }
+
+
+    @GetMapping("/contacts")
+    public ResponseEntity<Page<ContactDTO>> getAllContacts(@RequestParam(value="page",defaultValue = "0") int page,
+                                                           @RequestParam(value = "size",defaultValue ="10") int size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ContactDTO> contacts=contactService.getAllContacts(pageable);
+        return ResponseEntity.ok(contacts);
+    }
+
 
 }

@@ -8,6 +8,8 @@ import com.minicrm.payload.ContactDTO;
 import com.minicrm.repository.ContactRepository;
 import com.minicrm.service.ContactService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -60,6 +62,14 @@ public class ContactServiceImpl implements ContactService {
         Contact contact=contactRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(""));
         contactRepository.delete(contact);
         return mapToDto(contact);
+    }
+
+
+
+    public Page<ContactDTO> getAllContacts(Pageable pageable)
+    {
+        return contactRepository.findAll(pageable)
+                .map(contact -> mapToDto(contact));
     }
 
     private ContactDTO mapToDto(Contact contact)

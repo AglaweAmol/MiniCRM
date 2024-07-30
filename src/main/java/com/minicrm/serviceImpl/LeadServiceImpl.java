@@ -1,11 +1,14 @@
 package com.minicrm.serviceImpl;
 
+import com.minicrm.entity.Contact;
 import com.minicrm.entity.Leads;
 import com.minicrm.exception.ResourceNotFoundException;
 import com.minicrm.payload.LeadDTO;
 import com.minicrm.repository.LeadRepository;
 import com.minicrm.service.LeadService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -62,6 +65,12 @@ public class LeadServiceImpl implements LeadService {
         leadRepository.delete(leads);
 
         return mapToDto(leads);
+    }
+
+    @Override
+    public Page<LeadDTO> getAllLeads(Pageable pageable) {
+
+        return leadRepository.findAll(pageable).map(leads -> mapToDto(leads));
     }
 
     // convert Entity into DTO

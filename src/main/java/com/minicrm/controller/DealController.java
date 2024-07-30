@@ -2,8 +2,12 @@ package com.minicrm.controller;
 
 
 import com.minicrm.payload.DealDTO;
+import com.minicrm.payload.LeadDTO;
 import com.minicrm.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +44,16 @@ public class DealController {
 
         DealDTO dealDTO1=dealService.updateDealById(dealDTO,id);
         return new ResponseEntity<>(dealDTO1,HttpStatus.OK);
+    }
+
+
+    @GetMapping("/deals")
+    public ResponseEntity<Page<DealDTO>> getAllDeals(@RequestParam(value = "page",defaultValue = "0")int page,
+                                                     @RequestParam(value = "size",defaultValue = "10")int size)
+    {
+        Pageable pageable= PageRequest.of(page, size);
+        Page<DealDTO> deals=dealService.getAllDeals(pageable);
+        return ResponseEntity.ok(deals);
     }
 
 
